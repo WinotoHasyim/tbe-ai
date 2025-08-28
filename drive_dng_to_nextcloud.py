@@ -203,7 +203,7 @@ def compress_dng_to_jpeg_bytes(dng_bytes):
         # --- Stage 1: Coarse search (steps of 5) ---
         for quality in range(95, 10, -5):
             encode_param = [int(cv2.IMWRITE_JPEG_QUALITY), quality]
-            result, encoded_image = cv2.imencode('.jpg', bgr_image, encode_param)
+            result, encoded_image = cv2.imencode('.jpeg', bgr_image, encode_param)
             if not result: continue
 
             file_size_mb = len(encoded_image) / (1024 * 1024)
@@ -225,7 +225,7 @@ def compress_dng_to_jpeg_bytes(dng_bytes):
                     # --- Stage 2: Fine-grained search ---
                     for fine_quality in range(high_quality - 1, low_quality, -1):
                         encode_param = [int(cv2.IMWRITE_JPEG_QUALITY), fine_quality]
-                        result, encoded_image = cv2.imencode('.jpg', bgr_image, encode_param)
+                        result, encoded_image = cv2.imencode('.jpeg', bgr_image, encode_param)
                         if not result: continue
                         
                         file_size_mb = len(encoded_image) / (1024 * 1024)
